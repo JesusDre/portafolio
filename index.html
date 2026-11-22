@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jesus Juarez — Archivo</title>
+  <meta name="description" content="Portafolio de Jesus (JesusDre), desarrollador de software: proyectos, repositorios y lo que viene." />
+  <meta name="theme-color" content="#f4ecd8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d0e0c" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231f1d1a'/%3E%3Crect x='9' y='9' width='14' height='14' fill='none' stroke='%23f4ecd8' stroke-width='2'/%3E%3Crect x='14' y='14' width='4' height='4' fill='%23e2401c'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script>
+    // Aplica el tema antes de pintar para evitar parpadeo
+    try {
+      const t = localStorage.getItem("theme");
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Secuencia de arranque -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <pre id="boot-log"></pre>
+  </div>
+
+  <div class="shell">
+    <!-- Barra superior -->
+    <header class="topbar">
+      <div class="tb-left">
+        <span class="sq"></span>
+        <span>JD/ARCHIVO</span>
+        <span class="muted">v26.11</span>
+      </div>
+      <div class="tb-mid muted" aria-hidden="true">
+        <span id="coords">X 0000 · Y 0000</span>
+      </div>
+      <div class="tb-right">
+        <span class="muted" id="clock">--:--:--</span>
+        <button class="theme-toggle sound-toggle" id="sound-toggle" type="button" aria-pressed="false" aria-label="Activar música y sonidos">
+          <span class="tt-label">AUDIO</span>
+          <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="tt-value" id="sound-value">OFF</span>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema">
+          <span class="tt-label">MODO</span>
+          <span class="tt-track"><span class="tt-knob"></span></span>
+          <span class="tt-value" id="theme-value">DÍA</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Menú lateral -->
+    <aside class="menu">
+      <div class="identity">
+        <p class="eyebrow">UNIDAD // <span id="id-handle"></span></p>
+        <h1 class="name"><span id="id-name"></span><em>.</em></h1>
+        <p class="role" id="id-role"></p>
+      </div>
+
+      <nav class="nav" aria-label="Secciones">
+        <ol id="nav-list">
+          <li><a href="#inicio" data-section="inicio"><span class="n">00</span><span class="t" data-text="INICIO">INICIO</span></a></li>
+          <li><a href="#archivo" data-section="archivo"><span class="n">01</span><span class="t" data-text="ARCHIVO">ARCHIVO</span></a></li>
+          <li><a href="#experiencia" data-section="experiencia"><span class="n">02</span><span class="t" data-text="EXPERIENCIA">EXPERIENCIA</span></a></li>
+          <li><a href="#perfil" data-section="perfil"><span class="n">03</span><span class="t" data-text="PERFIL">PERFIL</span></a></li>
+          <li><a href="#enlace" data-section="enlace"><span class="n">04</span><span class="t" data-text="ENLACE">ENLACE</span></a></li>
+        </ol>
+      </nav>
+
+      <p class="hint muted">
+        <kbd>↑</kbd><kbd>↓</kbd> navegar &nbsp;·&nbsp; <kbd>0</kbd>–<kbd>4</kbd> saltar &nbsp;·&nbsp; <kbd>T</kbd> tema &nbsp;·&nbsp; <kbd>M</kbd> audio
+      </p>
+    </aside>
+
+    <!-- Panel principal -->
+    <main class="panel" id="panel">
+      <!-- 00 INICIO -->
+      <section class="view" id="view-inicio" data-view="inicio">
+        <div class="view-head">
+          <span class="tag">00 / INICIO</span>
+          <span class="rule"></span>
+        </div>
+        <div class="hero">
+          <p class="hero-kicker muted">// registro abierto</p>
+          <h2 class="hero-title">
+            Construyo sistemas<br />
+            <em>que se sienten vivos.</em>
+          </h2>
+          <p class="hero-copy" id="hero-copy"></p>
+          <div class="hero-stats" id="hero-stats"></div>
+          <div class="hero-actions">
+            <a class="btn" href="#archivo"><span>Ver archivo</span><span class="arrow">→</span></a>
+            <a class="btn ghost" id="hero-gh" target="_blank" rel="noopener"><span>GitHub</span><span class="arrow">↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 01 ARCHIVO -->
+      <section class="view" id="view-archivo" data-view="archivo" hidden>
+        <div class="view-head">
+          <span class="tag">01 / ARCHIVO</span>
+          <span class="rule"></span>
+          <span class="muted small" id="archive-count"></span>
+        </div>
+        <p class="lead muted">Proyectos en construcción. Nombres provisionales.</p>
+        <div class="archive">
+          <ul class="rows" id="rows"></ul>
+          <article class="inspector" id="inspector" aria-live="polite"></article>
+        </div>
+      </section>
+
+      <!-- 02 EXPERIENCIA -->
+      <section class="view" id="view-experiencia" data-view="experiencia" hidden>
+        <div class="view-head">
+          <span class="tag">02 / EXPERIENCIA</span>
+          <span class="rule"></span>
+          <span class="muted small">hoja de personaje</span>
+        </div>
+
+        <div class="sheet">
+          <ol class="timeline" id="timeline" aria-label="Línea de tiempo"></ol>
+          <div class="char">
+            <div class="char-top">
+              <div>
+                <p class="eyebrow">CLASE // <span id="char-class"></span></p>
+                <h3 class="char-name" id="char-name"></h3>
+              </div>
+              <div class="lvl">
+                <span class="lvl-k">NV.</span>
+                <span class="lvl-v" id="lvl">01</span>
+              </div>
+            </div>
+            <div class="xp">
+              <div class="xp-bar"><i id="xp-fill"></i></div>
+              <div class="xp-meta"><span id="xp-text">XP 0</span><span id="xp-next"></span></div>
+            </div>
+            <svg class="radar" id="radar" viewBox="-155 -122 310 244" role="img" aria-label="Gráfica de atributos"></svg>
+          </div>
+
+          <ul class="attrs" id="attrs"></ul>
+        </div>
+
+        <article class="quest" id="quest" aria-live="polite"></article>
+      </section>
+
+      <!-- 03 PERFIL -->
+      <section class="view" id="view-perfil" data-view="perfil" hidden>
+        <div class="view-head">
+          <span class="tag">03 / PERFIL</span>
+          <span class="rule"></span>
+        </div>
+        <div class="profile">
+          <div class="about" id="about"></div>
+          <div class="side">
+            <h4 class="sub">Idiomas</h4>
+            <ul class="langs" id="langs"></ul>
+            <h4 class="sub">Habilidades blandas</h4>
+            <ul class="chips" id="soft"></ul>
+          </div>
+        </div>
+        <h4 class="sub">Tecnologías</h4>
+        <div class="stack" id="stack"></div>
+      </section>
+
+      <!-- 04 ENLACE -->
+      <section class="view" id="view-enlace" data-view="enlace" hidden>
+        <div class="view-head">
+          <span class="tag">04 / ENLACE</span>
+          <span class="rule"></span>
+        </div>
+        <div class="contact">
+          <h2 class="contact-title">¿Tienes un proyecto<br /><em>en mente?</em></h2>
+          <p class="contact-copy">Estoy abierto a proyectos freelance, colaboraciones y puestos de desarrollo, remotos o en Morelos. Escríbeme y te respondo pronto.</p>
+          <div class="contact-cta">
+            <a class="btn" id="cta-mail"><span>Escribir un correo</span><span class="arrow">→</span></a>
+            <button class="btn ghost" id="copy-mail" type="button"><span id="copy-label">Copiar correo</span><span class="arrow">⧉</span></button>
+          </div>
+          <ul class="links" id="links"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottombar muted">
+      <span id="status">ESTADO: EN LÍNEA</span>
+      <span class="bb-mid" id="section-readout">SECCIÓN 00</span>
+      <span>© <span id="year"></span> JesusDre</span>
+    </footer>
+
+    <!-- Esquinas del marco -->
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+  </div>
+
+  <script src="data.js?v=8"></script>
+  <script src="audio.js?v=8"></script>
+  <script src="main.js?v=8"></script>
+</body>
+</html>

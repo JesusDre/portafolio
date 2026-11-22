@@ -34,7 +34,7 @@ window.PROFILE = {
   languages: [
     { name: "Español", level: "Nativo", value: 100 },
     { name: "Francés", level: "Intermedio", value: 60 },
-    { name: "Inglés", level: "Básico", value: 35 },
+    { name: "Inglés", level: "Intermedio · preparación de certificación", value: 55 },
   ],
   soft: ["Adaptabilidad", "Comunicación efectiva", "Aprendizaje continuo", "Proactivo", "Resolutivo", "Responsable"],
 };

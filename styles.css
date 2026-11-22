@@ -313,7 +313,8 @@ kbd {
 .nav a.active:hover .t, .nav a.active:focus-visible .t { color: var(--bg); }
 .nav a.active { border-left: 1px solid var(--accent); }
 
-.hint { font-size: 10px; letter-spacing: 0.08em; margin: 0; }
+.hint { font-size: 11px; letter-spacing: 0.08em; line-height: 2; margin: 0; flex: none; }
+.hint kbd { font-size: 11px; line-height: 17px; }
 
 /* ── Panel ────────────────────────────────────────────────── */
 .panel {
@@ -782,6 +783,33 @@ button.btn { cursor: pointer; }
 .links .k { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.7; }
 .links .v { font-size: 14px; overflow-wrap: anywhere; }
 
+/* Tamaños de lectura: Perfil y Experiencia al nivel de Enlace */
+.about p { font-size: 15px; line-height: 1.7; }
+.about p:first-child { font-size: clamp(28px, 2.8vw, 40px); line-height: 1.12; }
+.sub { font-size: 11px; }
+.lg-name { font-size: 26px; }
+.lg-lvl { font-size: 11px; text-align: right; }
+.side .chips li, .cat .chips li { font-size: 12px; padding: 3px 9px; }
+.cat h5 { font-size: 26px; }
+.cat-n { font-size: 11px; }
+
+.char-name { font-size: 36px; }
+.xp-meta { font-size: 11px; }
+.r-label { font-size: 8.5px; }
+.tl-label { font-size: 12px; }
+.tl-sub { font-size: 11px; }
+.tl-play button { font-size: 11px; }
+.attrs li { grid-template-columns: 130px 1fr 30px 38px; }
+.a-name { font-size: 13px; }
+.a-val { font-size: 14px; }
+.a-delta { font-size: 13px; }
+.q-head { font-size: 11px; }
+.q-body { font-size: 14px; }
+.q-body h3 { font-size: 34px; }
+.q-body .eyebrow { font-size: 11px; }
+.q-body .bullets li + li { margin-top: 6px; }
+.q-side .chips li { font-size: 12px; padding: 3px 9px; }
+
 /* Barra inferior */
 .bottombar {
   grid-area: bottom;
@@ -862,9 +890,10 @@ button.btn { cursor: pointer; }
 }
 
 @media (min-width: 761px) and (max-height: 720px) and (orientation: landscape) {
-  .menu { padding: 20px 0 12px; overflow: hidden; }
-  .name { font-size: clamp(36px, 6.5vh, 64px); }
-  .hint { display: none; }
+  .menu { padding: 16px 0 8px; gap: 12px; }
+  .name { font-size: clamp(34px, 6vh, 60px); }
+  .role { margin-top: 8px; }
+  .hint { font-size: 10px; line-height: 1.8; }
   .nav a { padding-top: 6px; padding-bottom: 6px; }
   .panel { padding-top: 20px; }
 }
